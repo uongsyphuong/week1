@@ -13,8 +13,7 @@ The following **required** functionality is completed:
 * [X] For each movie displayed, user can see the following details:
   * [X] Title, Poster Image, Overview (Portrait mode)
   * [X] Title, Backdrop Image, Overview (Landscape mode)
-  * Bug: Detail Activity : portrait, land layout.
-
+  
 The following **optional** features are implemented:
 
 * [X] Display a nice default [placeholder graphic](https://guides.codepath.com/android/Displaying-Images-with-the-Glide-Library) for each image during loading.
@@ -24,7 +23,7 @@ The following **bonus** features are implemented:
 * [X] Allow user to view details of the movie including ratings and popularity within a separate activity or dialog fragment.
 * [X] When viewing a popular movie (i.e. a movie voted for more than 5 stars) the video should show the full backdrop image as the layout.  Uses [Heterogenous RecyclerView](http://guides.codepath.com/android/Heterogenous-Layouts-inside-RecyclerView) to show different layouts.
 * [X] Allow video trailers to be played in full-screen using the YouTubePlayerView.
-    * [ ] Overlay a play icon for videos that can be played.
+    * [X] Overlay a play icon for videos that can be played.
     * [X] More popular movies should start a separate activity that plays the video immediately.
     * [X] Less popular videos rely on the detail page should show ratings and a YouTube preview.
 * [X] Apply the popular [Butterknife annotation library](http://guides.codepath.com/android/Reducing-View-Boilerplate-with-Butterknife) to reduce boilerplate code.
@@ -38,24 +37,26 @@ The following **additional** features are implemented:
 
 Here's a walkthrough of implemented user stories:
 
-https://i.imgur.com/UqZvoId.gif
-https://i.imgur.com/Tg8vR7H.gif
+<img src='https://i.imgur.com/UqZvoId.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+
+<img src='https://i.imgur.com/Tg8vR7H.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
 ## Notes
 
-Describe any challenges encountered while building the app.
+  * Moving from Main activity(horizontal) to Detail activity , the Detail activity is vertical.
+  * The overview text has not implemented.
+  
 
 ## Open-source libraries used
 
-- [Android Async HTTP](https://github.com/loopj/android-async-http) - Simple asynchronous HTTP requests with JSON parsing
-- [Picasso](http://square.github.io/picasso/) - Image loading and caching library for Android
-
+- [Retrofit](http://square.github.io/retrofit/) - A type-safe HTTP client for Android and Java
+- [Glide](https://bumptech.github.io/glide/) - A fast and efficient image loading library for Android
 ## License
 
-    Copyright [yyyy] [Leon Uong]
+    Copyright 2018 Leon Uong
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
