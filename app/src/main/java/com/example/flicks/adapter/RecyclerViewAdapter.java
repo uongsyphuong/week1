@@ -13,10 +13,11 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.example.usphuong.flicks.R;
 import com.example.usphuong.flicks.api.ApiService;
 import com.example.usphuong.flicks.model.Movie;
+
 import java.util.List;
-import com.example.usphuong.flicks.R;
 
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 

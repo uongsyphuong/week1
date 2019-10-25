@@ -2,23 +2,21 @@ package com.example.usphuong.flicks;
 
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.widget.Toast;
 
 import com.example.usphuong.flicks.adapter.RecyclerViewAdapter;
 import com.example.usphuong.flicks.api.ApiModule;
 import com.example.usphuong.flicks.api.ApiService;
-import com.example.usphuong.flicks.model.Movie;
 import com.example.usphuong.flicks.entity.NowPlaying;
 import com.example.usphuong.flicks.mapper.DataMapper;
+import com.example.usphuong.flicks.model.Movie;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

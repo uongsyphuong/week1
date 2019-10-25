@@ -1,10 +1,9 @@
 package com.example.usphuong.flicks.entity;
 
-import java.util.List;
-
-import com.example.usphuong.flicks.model.Trailer;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
+import java.util.List;
 
 public class Videos {
 

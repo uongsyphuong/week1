@@ -3,17 +3,14 @@ package com.example.usphuong.flicks;
 import android.annotation.SuppressLint;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.example.usphuong.flicks.adapter.RecyclerViewAdapter;
 import com.example.usphuong.flicks.api.ApiModule;
 import com.example.usphuong.flicks.api.ApiService;
-import com.example.usphuong.flicks.entity.NowPlaying;
 import com.example.usphuong.flicks.entity.Videos;
 import com.example.usphuong.flicks.mapper.DataMapper;
 import com.example.usphuong.flicks.model.Movie;
@@ -50,7 +47,7 @@ public class DetailActivity extends YouTubeBaseActivity {
     @Override
     protected void onCreate( Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.detail_land_activity);
+        setContentView(R.layout.detail_activity);
         ButterKnife.bind(this);
         Bundle bundle = getIntent().getExtras();
         movie = (Movie) (bundle != null ? bundle.getParcelable("movie") : null);
