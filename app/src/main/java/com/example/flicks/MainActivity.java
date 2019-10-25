@@ -21,9 +21,10 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MainActivity extends AppCompatActivity{
+public class MainActivity extends AppCompatActivity {
 
-    protected  List<Movie> movieList;
+    //
+    protected List<Movie> movieList;
     protected RecyclerViewAdapter adapter;
     protected DataMapper mapper;
 
@@ -38,21 +39,57 @@ public class MainActivity extends AppCompatActivity{
         recyclerView = findViewById(R.id.rv);
         swipeRefreshLayout = findViewById(R.id.swipeRefresh);
 
-        if(movieList == null){
-            movieList = new ArrayList<>();
-            setupList();
-            getNowPlaying();
-        }
-        else adapter.setData(movieList);
+        movieList = new ArrayList<>();
+        setupList();
+        getNowPlaying();
+    }
+
+    private void setupList() {
+        // khai bao recycler view
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(mLayoutManager);
+        adapter = new RecyclerViewAdapter(MainActivity.this, movieList);
+
+        //set data cho recycler view
+        adapter.setData(movieList == null ? new ArrayList<Movie>() : movieList);
+
+        //set adapter cho recycler view
+        recyclerView.setAdapter(adapter);
+
+        // set click cho từng item trong list
+        adapter.setListener(new RecyclerViewAdapter.IClickListener() {
+            @Override
+            public void onItemClick(Movie movie) {
+                // truyền phim vào trong màn hình sau
+                Bundle bundle = new Bundle();
+                bundle.putParcelable("movie", movie);
+                Intent detail = new Intent(MainActivity.this, DetailActivity.class);
+                detail.putExtras(bundle);
+                startActivity(detail);
+            }
+        });
+
+        //
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                adapter.clearData();
+                getNowPlaying();
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
 
     }
-    private void getNowPlaying() {
 
+    private void getNowPlaying() {
+        mapper = new DataMapper();
+
+        // goi api để lấy danh sách phim
         ApiModule.getInstance().getNowPlaying(ApiService.API_KEY)
                 .enqueue(new Callback<NowPlaying>() {
                     @Override
                     public void onResponse(Call<NowPlaying> call, Response<NowPlaying> response) {
-                        if(response.body() != null){
+                        if (response.body() != null) {
                             movieList = mapper.transform(response.body());
                             adapter.setData(movieList);
                         }
@@ -62,38 +99,6 @@ public class MainActivity extends AppCompatActivity{
                     public void onFailure(Call<NowPlaying> call, Throwable t) {
                     }
                 });
-
-    }
-
-    private void setupList() {
-        mapper = new DataMapper();
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(mLayoutManager);
-
-        adapter = new RecyclerViewAdapter(MainActivity.this,movieList);
-        adapter.setData(movieList==null ? new ArrayList<Movie>(): movieList);
-        recyclerView.setAdapter(adapter);
-
-        adapter.setListener(new RecyclerViewAdapter.IClickListener() {
-            @Override
-            public void onItemClick(Movie movie) {
-                Bundle bundle = new Bundle();
-                bundle.putParcelable("movie",movie);
-                Intent detail =new Intent(MainActivity.this, DetailActivity.class);
-                detail.putExtras(bundle);
-                startActivity(detail);            }
-        });
-
-        this.recyclerView.setAdapter(adapter);
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                adapter.clearData();
-                getNowPlaying();
-                swipeRefreshLayout.setRefreshing(false);
-
-            }
-        });
 
     }
 }

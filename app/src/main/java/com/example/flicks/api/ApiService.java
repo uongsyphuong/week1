@@ -20,9 +20,11 @@ public interface ApiService {
     String BACKDROP_SIZE = "w400";
     Double AVER_RATING = 7.5;
 
+    //lấy phim
     @GET("/3/movie/now_playing")
     Call<NowPlaying> getNowPlaying(@Query("api_key") String API_KEY);
 
+    //lấy video để chạy youtube
     @GET("/3/movie/{movie_id}/videos")
     Call<Videos> getVideo(@Path("movie_id") int id,
                           @Query("api_key") String API_KEY);

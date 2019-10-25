@@ -13,7 +13,6 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.flicks.R;
-import com.example.flicks.api.ApiService;
 import com.example.flicks.model.Movie;
 
 import java.util.List;
@@ -43,41 +42,24 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         notifyDataSetChanged();
     }
 
-    @Override
-    public int getItemViewType(int position) {
-        if (mData.get(position).getVoteAverage() >= ApiService.AVER_RATING)
-            return 1;
-        else
-            return 0;
-    }
-
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view;
         LayoutInflater inflater = LayoutInflater.from(mContext);
-        if (viewType == 1) {
-            view = inflater.inflate(R.layout.movie_row_item_popular, parent, false);
-        } else view = inflater.inflate(R.layout.movie_row_item, parent, false);
+        view = inflater.inflate(R.layout.movie_row_item, parent, false);
         return new MyViewHolder(view);
     }
 
     @SuppressLint("StringFormatMatches")
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        if (holder.getItemViewType() == 1) {
-            Glide.with(mContext).load(mData.get(position).getBackdropPath()).apply(new RequestOptions()
-                    .fitCenter())
-                    .apply(bitmapTransform(new RoundedCornersTransformation(10, 0, RoundedCornersTransformation.CornerType.ALL)))
-                    .into(holder.img_backdrop_popular);
-        } else {
-            holder.tv_name.setText(mData.get(position).getTitle());
-            holder.tv_overview.setText(mData.get(position).getOverview());
-            Glide.with(mContext).load(mData.get(position).getPosterPath()).apply(new RequestOptions()
-                    .fitCenter())
-                    .apply(bitmapTransform(new RoundedCornersTransformation(10, 0, RoundedCornersTransformation.CornerType.ALL)))
-                    .into(holder.img_poster);
-        }
+        holder.tv_name.setText(mData.get(position).getTitle());
+        holder.tv_overview.setText(mData.get(position).getOverview());
+        Glide.with(mContext).load(mData.get(position).getPosterPath()).apply(new RequestOptions()
+                .fitCenter())
+                .apply(bitmapTransform(new RoundedCornersTransformation(10, 0, RoundedCornersTransformation.CornerType.ALL)))
+                .into(holder.img_poster);
     }
 
     @Override
@@ -94,7 +76,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         TextView tv_name;
         TextView tv_overview;
         ImageView img_poster;
-        ImageView img_backdrop_popular;
 
         public MyViewHolder(View itemView) {
             super(itemView);
@@ -102,7 +83,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             tv_name = itemView.findViewById(R.id.rowname);
             tv_overview = itemView.findViewById(R.id.overview);
             img_poster = itemView.findViewById(R.id.poster);
-            img_backdrop_popular = itemView.findViewById(R.id.backdrop_popular);
+            //
             itemView.setOnClickListener(this);
         }
 

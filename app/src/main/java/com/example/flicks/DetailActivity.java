@@ -57,6 +57,7 @@ public class DetailActivity extends YouTubeBaseActivity {
         youtube_player = findViewById(R.id.youtube_player);
         tv_rating = findViewById(R.id.tv_rating);
 
+        // lấy dữ liệu từ bên màn hình cũ
         Bundle bundle = getIntent().getExtras();
         movie = (Movie) (bundle != null ? bundle.getParcelable("movie") : null);
 
@@ -67,9 +68,12 @@ public class DetailActivity extends YouTubeBaseActivity {
     private void getTrailer() {
 
         mapper = new DataMapper();
+
+        // lấy link video trailer youtube
         ApiModule.getInstance().getVideo(movie.getId(), ApiService.API_KEY)
                 .enqueue(new Callback<Videos>() {
                     @Override
+                    //gọi thành công
                     public void onResponse(Call<Videos> call, Response<Videos> response) {
                         if(response.body() != null){
                             trailersList = mapper.transform(response.body());
@@ -78,8 +82,8 @@ public class DetailActivity extends YouTubeBaseActivity {
 
                         }
                     }
-
                     @Override
+                    //gọi thất bại
                     public void onFailure(Call<Videos> call, Throwable t) {
                     }
                 });
@@ -87,18 +91,21 @@ public class DetailActivity extends YouTubeBaseActivity {
     }
 
     private void youtubePlayer(final String key) {
+        //setup link video để chạy youtube
         youtube_player.initialize(ApiService.API_KEY_YOUTUBE,
                 new YouTubePlayer.OnInitializedListener() {
                     @Override
+                    //set link thành công
                     public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
+                        // nếu rating phim > 7.5 thì play video luôn không thì chỉ load
                         if (movie.getVoteAverage() >= ApiService.AVER_RATING) {
-                            youTubePlayer.loadVideo(key); // .loadVideo: Play now - .cueVideo: only load
+                            youTubePlayer.loadVideo(key); // chạy video
                             youTubePlayer.setShowFullscreenButton(false);
-                        }
-                        else youTubePlayer.cueVideo(key);
+                        } else youTubePlayer.cueVideo(key); //load video
                     }
 
                     @Override
+                    //load video thất bại
                     public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult youTubeInitializationResult) {
 
                     }
@@ -108,6 +115,7 @@ public class DetailActivity extends YouTubeBaseActivity {
     @SuppressLint("SetTextI18n")
     private void setupData() {
 
+        //set dữ liệu phim vào từng view
         tv_title.setText(movie.getTitle());
         rating_bar.setRating(movie.getVoteAverage().floatValue());
         rating_bar.setIsIndicator(true);
@@ -115,6 +123,7 @@ public class DetailActivity extends YouTubeBaseActivity {
         tv_overview_detail.setText(movie.getOverview());
         tv_rating.setText(movie.getVoteAverage().toString());
 
+        // xài thư viện Glide để load hình
         Glide.with(DetailActivity.this).load(movie.getPosterPath()).apply(new RequestOptions()
                 .fitCenter())
                 .apply(bitmapTransform(new RoundedCornersTransformation(10, 0, RoundedCornersTransformation.CornerType.ALL)))
