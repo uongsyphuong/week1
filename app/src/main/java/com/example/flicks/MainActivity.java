@@ -1,25 +1,22 @@
-package com.example.usphuong.flicks;
+package com.example.flicks;
 
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import com.example.usphuong.flicks.adapter.RecyclerViewAdapter;
-import com.example.usphuong.flicks.api.ApiModule;
-import com.example.usphuong.flicks.api.ApiService;
-import com.example.usphuong.flicks.entity.NowPlaying;
-import com.example.usphuong.flicks.mapper.DataMapper;
-import com.example.usphuong.flicks.model.Movie;
+import com.example.flicks.adapter.RecyclerViewAdapter;
+import com.example.flicks.api.ApiModule;
+import com.example.flicks.api.ApiService;
+import com.example.flicks.entity.NowPlaying;
+import com.example.flicks.mapper.DataMapper;
+import com.example.flicks.model.Movie;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -30,14 +27,17 @@ public class MainActivity extends AppCompatActivity{
     protected RecyclerViewAdapter adapter;
     protected DataMapper mapper;
 
-    @BindView(R.id.rv) RecyclerView recyclerView;
-    @BindView(R.id.swipeRefresh) SwipeRefreshLayout swipeRefreshLayout;
+    RecyclerView recyclerView;
+    SwipeRefreshLayout swipeRefreshLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ButterKnife.bind(this);
+
+        recyclerView = findViewById(R.id.rv);
+        swipeRefreshLayout = findViewById(R.id.swipeRefresh);
+
         if(movieList == null){
             movieList = new ArrayList<>();
             setupList();
@@ -95,11 +95,5 @@ public class MainActivity extends AppCompatActivity{
             }
         });
 
-    }
-
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-        setupList();
     }
 }

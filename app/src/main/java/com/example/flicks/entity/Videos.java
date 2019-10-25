@@ -1,4 +1,4 @@
-package com.example.usphuong.flicks.entity;
+package com.example.flicks.entity;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

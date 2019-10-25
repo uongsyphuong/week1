@@ -1,12 +1,11 @@
-package com.example.usphuong.flicks.mapper;
+package com.example.flicks.mapper;
 
 
-
-import com.example.usphuong.flicks.api.ApiService;
-import com.example.usphuong.flicks.entity.NowPlaying;
-import com.example.usphuong.flicks.entity.Videos;
-import com.example.usphuong.flicks.model.Movie;
-import com.example.usphuong.flicks.model.Trailer;
+import com.example.flicks.api.ApiService;
+import com.example.flicks.entity.NowPlaying;
+import com.example.flicks.entity.Videos;
+import com.example.flicks.model.Movie;
+import com.example.flicks.model.Trailer;
 
 import java.util.ArrayList;
 import java.util.List;

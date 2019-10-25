@@ -1,8 +1,8 @@
-package com.example.usphuong.flicks.api;
+package com.example.flicks.api;
 
 
-import com.example.usphuong.flicks.entity.NowPlaying;
-import com.example.usphuong.flicks.entity.Videos;
+import com.example.flicks.entity.NowPlaying;
+import com.example.flicks.entity.Videos;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

@@ -1,4 +1,4 @@
-package com.example.usphuong.flicks.model;
+package com.example.flicks.model;
 
 public class Trailer {
 
